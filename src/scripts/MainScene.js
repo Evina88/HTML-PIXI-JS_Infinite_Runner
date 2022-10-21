@@ -6,6 +6,7 @@ import { Platforms } from "./Platforms";
 export class MainScene {
 	constructor() {
 		this.container = new PIXI.Container();
+
 		this.createBackground();
 		this.createPlatforms();
 	}

@@ -5,11 +5,32 @@ const TileSize = 64;
 
 export class Platform {
 	constructor(rows, cols, x) {
+		this.dx = -5;
+
 		this.rows = rows;
 		this.cols = cols;
 
+		this.width = cols * TileSize;
+		this.height = rows * TileSize;
+
 		this.createContainer(x);
 		this.createTiles();
+	}
+
+	get left() {
+		return this.container.x;
+	}
+
+	get right() {
+		return this.left + this.width;
+	}
+
+	get top() {
+		this.container.y;
+	}
+
+	get bottom() {
+		this.top + this.height;
 	}
 
 	createContainer(x) {
@@ -32,5 +53,13 @@ export class Platform {
 		this.container.addChild(tile);
 		tile.x = col * tile.width;
 		tile.y = row * tile.height;
+	}
+
+	move() {
+		this.container.x += this.dx;
+
+		if (this.right < 0) {
+			this.container.emit("hidden");
+		}
 	}
 }
